@@ -472,7 +472,13 @@ def initials_for_user(user_name: Any) -> str:
     if len(parts) == 1:
         return parts[0][:2].upper()
     return "".join(part[0] for part in parts[:2]).upper()
-
+    
+@st.cache_data(show_spinner=False)
+def image_data_uri(path: Path) -> str:
+    suffix = path.suffix.lower().lstrip(".")
+    mime = "jpeg" if suffix == "jpg" else suffix
+    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:image/{mime};base64,{encoded}"
 
 def image_data_uri(path: Path) -> str:
     suffix = path.suffix.lower().lstrip(".")
