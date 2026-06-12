@@ -387,7 +387,7 @@ def _normalize_row(item: dict[str, Any]) -> dict[str, Any]:
     return {column: item.get(column) for column in DISPLAY_COLUMNS}
 
 
-@st.cache_data(ttl=300, show_spinner=False)
+@st.cache_data(ttl=86400, show_spinner=False)
 def fetch_ranking() -> tuple[pd.DataFrame, int, datetime]:
     rows: list[dict[str, Any]] = []
     participant_count: int | None = None
